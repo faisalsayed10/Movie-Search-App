@@ -2,22 +2,21 @@ import React, { useState } from "react";
 import MovieCard from "./MovieCard";
 import * as styles from './styles.js'
 
-let count = 1;
 const noResults = "⚠️ There are no movies to display ⚠️";
 export default function SearchMovies() {
   const [query, setQuery] = React.useState("");
   const [movies, setMovies] = React.useState([]);
   const [error, setError] = useState('');
-  const [page, setPage] = useState(count)
+  const [page, setPage] = useState(1)
   const url = `https://api.themoviedb.org/3/search/movie?api_key=4e01aee1f0e35dd53596b9895362f9e9&language=en-US&page=1&include_adult=false&query=${query}`;
   const newUrl = `https://api.themoviedb.org/3/search/movie?api_key=4e01aee1f0e35dd53596b9895362f9e9&language=en-US&page=${page}&include_adult=false&query=${query}`;
-  const prevUrl = `https://api.themoviedb.org/3/search/movie?api_key=4e01aee1f0e35dd53596b9895362f9e9&language=en-US&page=${count - 1}&include_adult=false&query=${query}`;
+  const prevUrl = `https://api.themoviedb.org/3/search/movie?api_key=4e01aee1f0e35dd53596b9895362f9e9&language=en-US&page=${page - 1}&include_adult=false&query=${query}`;
   const inputStyleDecider = error ? styles.errorInputStyle : styles.normalInputStyle;
   const length = movies.length;
   const pgBtnStyleDecider = length > 0 ? styles.normalPgButtonStyle : styles.invalidPgButtonStyle
 
   async function setNewPage() {
-    setPage(count++)
+    setPage(page + 1)
     console.log('btn pg no.', page,)
     try {
       const newRes = await fetch(newUrl)
@@ -31,7 +30,7 @@ export default function SearchMovies() {
   }
 
 async function setPreviousPage() {
-  setPage(count--)
+  setPage(page - 1)
   console.log('btn pg no.', page,)
   try {
     const prevRes = await fetch(prevUrl)
@@ -63,7 +62,6 @@ async function setPreviousPage() {
         setMovies(filteredData || []);
         setError('')
         setPage(2)
-        console.log('searched pg no.', page)
       } catch (err) {
         setError(err);
       }
