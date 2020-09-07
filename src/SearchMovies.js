@@ -8,9 +8,9 @@ export default function SearchMovies() {
   const [movies, setMovies] = React.useState([]);
   const [error, setError] = useState('');
   const [page, setPage] = useState(1)
-  const url = `https://api.themoviedb.org/3/search/movie?api_key=4e01aee1f0e35dd53596b9895362f9e9&language=en-US&page=1&include_adult=false&query=${query}`;
-  const newUrl = `https://api.themoviedb.org/3/search/movie?api_key=4e01aee1f0e35dd53596b9895362f9e9&language=en-US&page=${page}&include_adult=false&query=${query}`;
-  const prevUrl = `https://api.themoviedb.org/3/search/movie?api_key=4e01aee1f0e35dd53596b9895362f9e9&language=en-US&page=${page - 1}&include_adult=false&query=${query}`;
+  const url = `https://api.themoviedb.org/3/search/movie?api_key=${YOUR_API_KEY}&language=en-US&page=1&include_adult=false&query=${query}`;
+  const newUrl = `https://api.themoviedb.org/3/search/movie?api_key=${YOUR_API_KEY}&language=en-US&page=${page}&include_adult=false&query=${query}`;
+  const prevUrl = `https://api.themoviedb.org/3/search/movie?api_key=${YOUR_API_KEY}&language=en-US&page=${page - 1}&include_adult=false&query=${query}`;
   const inputStyleDecider = error ? styles.errorInputStyle : styles.normalInputStyle;
   const length = movies.length;
   const pgBtnStyleDecider = length > 0 ? styles.normalPgButtonStyle : styles.invalidPgButtonStyle
